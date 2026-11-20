@@ -1,0 +1,5 @@
+# uFBT build output and generated editor files
+dist/
+.vscode/
+.clang-format
+.editorconfig

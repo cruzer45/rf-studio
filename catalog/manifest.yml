@@ -1,0 +1,17 @@
+# Draft manifest for the Flipper Application Catalog.
+# Copy to applications/Sub-GHz/rf_studio/manifest.yml in your fork of
+# flipperdevices/flipper-application-catalog, then fill in origin and commit_sha.
+# Paths below are relative to the repository root. Check with tools/bundle.py before submitting.
+sourcecode:
+  type: git
+  location:
+    origin: https://github.com/cruzer45/rf-studio.git
+    commit_sha: COMMIT_SHA
+short_description: Build and operate virtual Sub-GHz remotes from captured signals
+description: "@catalog/description.md"
+changelog: "@changelog.md"
+screenshots:
+  - screenshots/1_remote.png
+  - screenshots/2_menu.png
+  - screenshots/3_capture.png
+  - screenshots/4_library.png
