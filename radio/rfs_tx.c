@@ -3,6 +3,8 @@
 
 #include <flipper_format/flipper_format.h>
 #include <furi_hal_gpio.h>
+#include <furi_hal_region.h>
+#include <furi_hal_subghz.h>
 #include <lib/subghz/transmitter.h>
 #include <lib/subghz/protocols/raw.h>
 #include <storage/storage.h>
@@ -161,6 +163,15 @@ static RfsTxError rfs_tx_run(RfsTx* tx) {
         }
         if(status != SubGhzProtocolStatusOk) {
             result = rfs_tx_fail(tx, RfsTxErrEncoder);
+            break;
+        }
+
+        /* Never key up outside the region's allowed bands (RF-011). */
+        if(!furi_hal_region_is_frequency_allowed(frequency) ||
+           !furi_hal_subghz_is_frequency_valid(frequency)) {
+            tx->radio_result = RfsRadioErrTxBlocked;
+            tx->permission = RfsTxPermBlockedRegion;
+            result = rfs_tx_fail(tx, RfsTxErrRadio);
             break;
         }
 
